@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import useFetch from './custom-hook/useFetch';
 
 function App() {
+
+  const url = "https://inshortsapi.vercel.app/news?category=science";
+
+  const { data, loading, error } = useFetch(url);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 style={{ textAlign: 'center' }}>React Custom Hook Demo</h2>
+      <h3><u>useFetch Hook to fetch data from Server:</u></h3>
+      {loading && <h4>Loading...</h4>}
+      <div>
+        <pre>
+          {JSON.stringify(data, undefined, 1)}
+        </pre>
+      </div>
+      {error && <div>{JSON.stringify(error)}</div>}
     </div>
   );
 }
